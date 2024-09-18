@@ -23,7 +23,7 @@ class EventRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         return Event.objects.filter(organizer=self.request.user)
 
 class AvailableEventsListView(generics.ListAPIView):
-    queryset = Event.objects.filter(end_time__gte=dt.datetime.now())
+    queryset = Event.objects.filter(end_time__gte=dt.datetime.now()).order_by('?')
     serializer_class = EventSerializer
 
 class AvailableEventsRetrieveView(generics.RetrieveAPIView):

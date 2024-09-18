@@ -18,8 +18,8 @@ class Event(models.Model):
 
 
 class EventImage(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='events/images')
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='images', blank=True, null=True)
+    filepond = models.ImageField(upload_to='events/images')
 
     def __str__(self):
-        return self.image.url
+        return self.filepond.url

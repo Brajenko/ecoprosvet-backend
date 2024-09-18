@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'events',
     'places',
     'videos',
+    'participation_requests',
 ]
 
 MIDDLEWARE = [

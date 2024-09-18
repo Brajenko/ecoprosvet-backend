@@ -13,14 +13,11 @@ class EventSerializer(serializers.ModelSerializer):
         event = Event.objects.create(**validated_data)
 
         for image_id in images:
-            image = EventImage.filter(id=image_id).first()
-            event.images.add(
-                image
-            )
+            event.images.add(image_id)
 
         return event
 
 class EventImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventImage
-        fields = ('id', 'image', )
+        fields = ('id', 'filepond', )
