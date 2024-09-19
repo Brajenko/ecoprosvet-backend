@@ -169,7 +169,7 @@ SIMPLE_JWT = {
 # CORS
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ['https://ecoprosvet-backend.onrender.com/', 'https://green-center.vercel.app/']
+CSRF_TRUSTED_ORIGINS = ['https://ecoprosvet-backend.onrender.com', 'https://green-center.vercel.app']
 
 
 # Spectacular
