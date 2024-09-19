@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'drf_spectacular',
+    'import_export',
 
     'organizations',
     'users',
@@ -166,9 +167,17 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 # CORS
-CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://10.10.103.164:2005', 'https://3f51-188-32-82-225.ngrok-free.app', 'http://192.168.31.188:2005']
+BACKEND_URL = os.environ.get('BACKEND_URL', '')
+FRONTEND_URL = os.environ.get('FRONTEND_URL', '')
+if not BACKEND_URL:
+    CORS_ALLOW_ALL_ORIGINS = True
+    ALLOWED_HOSTS = ['*']
+    CSRF_TRUSTED_ORIGINS = []
+else:
+    CORS_ALLOWED_ORIGINS = [BACKEND_URL, FRONTEND_URL,]
+    ALLOWED_HOSTS = [BACKEND_URL]
+    CSRF_TRUSTED_ORIGINS = [BACKEND_URL, FRONTEND_URL]
+
 
 
 # Spectacular
@@ -179,3 +188,7 @@ SPECTACULAR_SETTINGS = {
 # Dadata API
 DADATA_API_KEY = os.environ.get('DADATA_API_KEY')
 DADATA_SECRET_KEY = os.environ.get('DADATA_SECRET_KEY') 
+
+# export
+from import_export.formats.base_formats import XLSX, CSV, JSON, YAML
+EXPORT_FORMATS = [XLSX, CSV, JSON, YAML]
