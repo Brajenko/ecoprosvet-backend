@@ -167,21 +167,9 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 # CORS
-BACKEND_URL = os.environ.get('BACKEND_URL', '')
-BACKEND_HOST = os.environ.get('BACKEND_HOST', '')
-FRONTEND_URL = os.environ.get('FRONTEND_URL', '')
-
-ALLOWED_HOSTS = [BACKEND_HOST if BACKEND_HOST else '*']
-
-CORS_ALLOWED_ORIGINS = []
-if BACKEND_URL:
-    CORS_ALLOWED_ORIGINS.append(BACKEND_URL)
-if FRONTEND_URL:
-    CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
-if not BACKEND_URL and not FRONTEND_URL:
-    CORS_ALLOW_ALL_ORIGINS = True
-
-CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS.copy()
+ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = ['https://ecoprosvet-backend.onrender.com/', 'https://green-center.vercel.app/']
 
 
 # Spectacular
