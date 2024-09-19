@@ -10,6 +10,7 @@ class Place(models.Model):
     lat = models.DecimalField(max_digits=9, decimal_places=6)
     lon = models.DecimalField(max_digits=9, decimal_places=6)
     address = models.CharField(max_length=100)
+    can_serve_events = models.BooleanField(default=False)
     creator = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

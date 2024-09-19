@@ -7,7 +7,7 @@ from .serializers import PlaceSerializer, PlacesImageSerializer
 from users.permissions import IsCreator, IsOrganizer
 
 class PlaceListView(ListAPIView):
-    queryset = Place.objects.all()
+    queryset = Place.objects.filter(can_serve_events=True)
     serializer_class = PlaceSerializer
 
 

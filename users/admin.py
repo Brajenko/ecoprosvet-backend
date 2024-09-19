@@ -4,25 +4,20 @@ from .models import CustomUser
 
 from django.contrib import admin
 from .models import CustomUser
+from organizations.models import Organization
+
+
+class OrganizationInline(admin.StackedInline):
+    model = Organization
+    can_delete = False
+    verbose_name_plural = 'organizations'
 
 
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'is_staff', 'is_active', 'is_organizer')
-    search_fields = ('email', 'organization_name')
-    list_filter = ('is_staff', 'is_active', 'is_organizer')
-    fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('birthday',)}),
-        ('Organization info', {'fields': ('is_organizer', 'organization_name', 'organization_description', 'organization_inn')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-    )
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'is_organizer', 'organization_name', 'organization_description', 'organization_inn', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
-        }),
-    )
+    inlines = (OrganizationInline, )
+    list_display = ('email', 'first_name', 'last_name', 'is_staff')
+    search_fields = ('email', 'first_name', 'last_name')
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
     ordering = ('email',)
-
 
 admin.site.register(CustomUser, CustomUserAdmin)

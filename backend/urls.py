@@ -21,7 +21,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from tokens.views import YandexAuthView
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -37,4 +37,6 @@ urlpatterns = [
     path('api/users/', include('users.urls')),
     path('api/events/', include('events.urls')),
     path('api/places/', include('places.urls')),
+    path('api/videos/', include('videos.urls')),
+    path('api/organizations/', include('organizations.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

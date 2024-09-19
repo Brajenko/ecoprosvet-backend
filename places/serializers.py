@@ -15,7 +15,7 @@ class PlaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Place
-        fields = ('id', 'name', 'description', 'images', 'address', 'lat', 'lon',)
+        fields = ('id', 'name', 'description', 'images', 'address', 'lat', 'lon', 'can_serve_events')
     
     def create(self, validated_data):
         validated_data['creator'] = self.context['request'].user

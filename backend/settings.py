@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8+)5sfyb1fnnsivdw&)u#_c(r1zir_umkt@p9a!dw%g9!a@cnn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
 
 # Application definition
@@ -40,11 +43,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
 
+    'organizations',
     'users',
     'events',
     'places',
     'videos',
-    'participation_requests',
 ]
 
 MIDDLEWARE = [
@@ -86,8 +89,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'eco'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '0'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '5432')
     }
 }
 
@@ -120,7 +127,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -159,10 +166,14 @@ SIMPLE_JWT = {
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://10.10.103.164:2005']
+CSRF_TRUSTED_ORIGINS = ['http://10.10.103.164:2005', 'https://3f51-188-32-82-225.ngrok-free.app', 'http://192.168.31.188:2005']
 
 
 # Spectacular
 SPECTACULAR_SETTINGS = {
     'SCHEMA_PATH_PREFIX': '/api'
 }
+
+# Dadata API
+DADATA_API_KEY = os.environ.get('DADATA_API_KEY')
+DADATA_SECRET_KEY = os.environ.get('DADATA_SECRET_KEY') 
